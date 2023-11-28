@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D target;
     public RuntimeAnimatorController[] animCon;
 
-    bool isLive = true ;
+    bool isLive = true;
 
     Rigidbody2D rigid;
     SpriteRenderer spriter;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!isLive)
+        if (!isLive)
         {
             return;
         }
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate()
     {
-        if(!isLive)
+        if (!isLive)
         {
             return;
         }
@@ -57,5 +57,27 @@ public class Enemy : MonoBehaviour
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        health -= collision.GetComponent<Bullet>().damage;
+
+        if (health < 0)
+        {
+
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
     }
 }
