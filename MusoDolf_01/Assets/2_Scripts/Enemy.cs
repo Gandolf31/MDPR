@@ -69,10 +69,11 @@ public class Enemy : MonoBehaviour
         if (health < 0)
         {
 
+            Dead();
+
         }
         else
         {
-            Dead();
         }
     }
 

@@ -355,6 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 627851101}
+  - component: {fileID: 627851102}
   m_Layer: 0
   m_Name: Weapon0
   m_TagString: Untagged
@@ -377,6 +378,23 @@ Transform:
   m_Father: {fileID: 2005376266}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &627851102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627851100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6cda55970c63a43b433dbf8c023dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  prefabid: 1
+  damage: 11
+  count: 1
+  speed: 0
 --- !u!1 &647211801
 GameObject:
   m_ObjectHideFlags: 0
@@ -9492,6 +9510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 4159509268511478242, guid: 32c3c23b28b538f4d8a0832b75067826, type: 3}
+  - {fileID: 8660425250842764551, guid: ed60704a84cd6dd43a33c0dc05a6ae80, type: 3}
 --- !u!4 &1071637116
 Transform:
   m_ObjectHideFlags: 0
