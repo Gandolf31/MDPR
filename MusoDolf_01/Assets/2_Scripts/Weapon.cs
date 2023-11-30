@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
         // test
         if (Input.GetButtonDown("Jump"))
         {
-            LevelUp(20, 5);
+            LevelUp(20, 8);
         }
     }
 
@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
     void Batch()
     {
         for(int index = 0; index < count; index++) {
-            Transform bullet = GameManager.instance.pool.Get(prefabid).transform;
+            Transform bullet;
 
             if(index < transform.childCount)
             {
