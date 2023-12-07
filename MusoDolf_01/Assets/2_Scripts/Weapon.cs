@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public int count;
     public float speed;
 
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,13 @@ public class Weapon : MonoBehaviour
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
             default:
+                timer += Time.deltaTime;
+
+                if(timer > speed)
+                {
+                    timer = 0f;
+                    Fire();
+                }
                 break;
         }
 
@@ -81,4 +89,8 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    void Fire()
+    {
+
+    }
 }
