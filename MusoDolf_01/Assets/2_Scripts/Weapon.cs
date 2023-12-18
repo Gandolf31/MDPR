@@ -5,12 +5,20 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public int id;
-    public int prefabid;
+    public int prefabId;
     public float damage;
     public int count;
     public float speed;
 
     float timer;
+    Player player;
+
+    void Awake()
+    {
+        player = GetComponentInParent<Player>();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +68,7 @@ public class Weapon : MonoBehaviour
                 Batch();
                 break;
             default:
+                speed = 0.3f;
                 break;
         }
     }
@@ -75,7 +84,7 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                bullet = GameManager.instance.pool.Get(prefabid).transform;
+                bullet = GameManager.instance.pool.Get(prefabId).transform;
                 bullet.parent = transform;
             }
             
@@ -91,6 +100,10 @@ public class Weapon : MonoBehaviour
 
     void Fire()
     {
+        if (!player.scanner.nearstTarget)
+            return;
 
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        bullet.position = transform.position;
     }
 }
