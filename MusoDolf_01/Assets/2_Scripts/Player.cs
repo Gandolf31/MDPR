@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame

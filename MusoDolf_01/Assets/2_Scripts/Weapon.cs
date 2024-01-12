@@ -15,14 +15,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        player = GetComponentInParent<Player>();
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Init();
+        player = GameManager.instance.player;
     }
 
     // Update is called once per frame
@@ -49,14 +42,34 @@ public class Weapon : MonoBehaviour
     public void LevelUp(float damage, int count)
     {
         this.damage = damage;
-        this.count = count;
+        this.count += count;
         if (id == 0)
             Batch();
-    }
 
-    public void Init()
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+    //특정 함수 호출을 모든 자식에게 방송하는 함수
+}
+
+    public void Init(ItemData data)
     {
-        switch(id)
+        name = "Weapon" + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int index = 0; index < GameManager.instance.pool.prefabs.Length; index++)
+        {
+            if (data.projectile == GameManager.instance.pool.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
+        switch (id)
         {
             case 0:
                 speed = -150;
@@ -66,6 +79,7 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f;
                 break;
         }
+
     }
 
     void Batch()
