@@ -65,6 +65,7 @@
     <Compile Include="Assets\2_Scripts\Reposition.cs" />
     <Compile Include="Assets\2_Scripts\Follow.cs" />
     <Compile Include="Assets\2_Scripts\Spawner.cs" />
+    <Compile Include="Assets\2_Scripts\Hand.cs" />
     <Compile Include="Assets\2_Scripts\Scanner.cs" />
     <Compile Include="Assets\2_Scripts\Gear.cs" />
     <Compile Include="Assets\2_Scripts\GameManager.cs" />

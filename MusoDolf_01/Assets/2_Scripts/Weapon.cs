@@ -80,6 +80,11 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
+        // Hand
+        Hand hand = player.hands[(int)data.itemType];
+        hand.spriter.sprite = data.hand;
+        hand.gameObject.SetActive(true);
+
     }
 
     void Batch()
