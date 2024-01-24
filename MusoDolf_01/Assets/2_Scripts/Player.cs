@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    // Update is called once per frame
+
+    // 키 입력에 따른 벡터값(플레이어 이동)
     void Update()
     {
         if (!GameManager.instance.isLive)
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
+    // 입력받은 벡터 방향에 따라 실제로 플레이어 위치를 움직임(물리연산 FixedUpdate)
     void FixedUpdate()
     {
         if (!GameManager.instance.isLive)
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         rigid.MovePosition(rigid.position + nextVec);
     }
 
+    //  플레이어 스프라이트 좌우 방향에 따른 반전
     void LateUpdate()
     {
         if (!GameManager.instance.isLive)
@@ -49,6 +52,24 @@ public class Player : MonoBehaviour
         if(inputVec.x != 0)
         {
             spriter.flipX = inputVec.x < 0;
+        }
+    }
+    // 플레이어 피격
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!GameManager.instance.isLive)
+            return;
+        GameManager.instance.health -= Time.deltaTime * 10;
+
+        if(GameManager.instance.health < 0)
+        {
+            for(int index = 2; index < transform.childCount; index++)
+            {
+                transform.GetChild(index).gameObject.SetActive(false);
+            }
+
+            anim.SetTrigger("Dead");
+            GameManager.instance.GameOver();
         }
     }
 }

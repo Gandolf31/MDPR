@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
-
+    // 총알에 능력치값 세팅 ( damage : 데미지, per : 관통력 , dir : 방향 )
     public void Init(float damage, int per, Vector3 dir)
     {
         this.damage = damage;
@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // 적에게 총알이 맞을때마다 관통력 -1 . . 0이 되면 active false
         if (!collision.CompareTag("Enemy") || per == -1)
             return;
 
