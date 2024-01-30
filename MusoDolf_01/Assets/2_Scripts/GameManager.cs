@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public float gameTime;                  // 게임 시간
     public float maxGameTime = 2 * 10f;     // 게임 시간 제한
     [Header("# Player Info")]
+    public int playerId;
     public float health;
     public float maxHealth = 100;
     public int level;
@@ -29,12 +30,14 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public void GameStart()
+    public void GameStart(int id)
     {
+        playerId = id;
         health = maxHealth;
 
+        player.gameObject.SetActive(true);
         //test
-        uiLevelUp.Select(0);    // 시작할 때 무기를 들고 시작하기 위함 - 첫번째 캐릭터 선택
+        uiLevelUp.Select(playerId % 2);    // 캐릭터id에 해당하는 캐릭터의 무기로 게임 스타트
         Resume();
     }
 

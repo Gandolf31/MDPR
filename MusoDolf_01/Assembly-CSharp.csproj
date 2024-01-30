@@ -74,6 +74,7 @@
     <Compile Include="Assets\2_Scripts\Player.cs" />
     <Compile Include="Assets\2_Scripts\ItemData.cs" />
     <Compile Include="Assets\2_Scripts\Bullet.cs" />
+    <Compile Include="Assets\2_Scripts\Character.cs" />
     <Compile Include="Assets\2_Scripts\Item.cs" />
   </ItemGroup>
   <ItemGroup>
