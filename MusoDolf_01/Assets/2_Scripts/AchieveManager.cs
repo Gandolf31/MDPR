@@ -7,13 +7,16 @@ public class AchieveManager : MonoBehaviour
 {
     public GameObject[] lockCharacter;
     public GameObject[] unlockCharacter;
+    public GameObject uiNotice;
 
     enum Achieve { UnlockPotato, UnlockBean };
     Achieve[] achieves;
+    WaitForSecondsRealtime wait;
 
     void Awake()
     {
         achieves = (Achieve[])Enum.GetValues(typeof(Achieve));
+        wait = new WaitForSecondsRealtime(5);
 
         if(!PlayerPrefs.HasKey("MyData"))
         {
@@ -70,6 +73,23 @@ public class AchieveManager : MonoBehaviour
         if(isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0)
         {
             PlayerPrefs.SetInt(achieve.ToString(), 1);
+
+            for(int index = 0; index < uiNotice.transform.childCount; index++)
+            {
+                bool isActive = index == (int)achieve;
+                uiNotice.transform.GetChild(index).gameObject.SetActive(isActive);
+            }
+
+            StartCoroutine(NoticeRoutine());
         }
+    }   
+
+    IEnumerator NoticeRoutine()
+    {
+        uiNotice.SetActive(true);
+
+        yield return wait;
+
+        uiNotice.SetActive(false);
     }
 }
