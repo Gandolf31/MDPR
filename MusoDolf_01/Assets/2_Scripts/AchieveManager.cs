@@ -87,7 +87,7 @@ public class AchieveManager : MonoBehaviour
     IEnumerator NoticeRoutine()
     {
         uiNotice.SetActive(true);
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Levelup);
         yield return wait;
 
         uiNotice.SetActive(false);

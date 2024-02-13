@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
         //test
         uiLevelUp.Select(playerId % 2);    // 캐릭터id에 해당하는 캐릭터의 무기로 게임 스타트
         Resume();
+
+        AudioManager.instance.PlayBgm(true);    
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     public void GameOver()
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
         uiResult.Lose();
 
         Stop();
+
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
 
@@ -77,6 +83,9 @@ public class GameManager : MonoBehaviour
         uiResult.Win();
 
         Stop();
+
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
     }
 
     public void GameRetry()
