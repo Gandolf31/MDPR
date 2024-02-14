@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
         this.per = per;
 
-        if(per > -1)
+        if(per >= 0)
         {
             rigid.velocity = dir * 15f;
         }
@@ -28,16 +28,24 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 적에게 총알이 맞을때마다 관통력 -1 . . 0이 되면 active false
-        if (!collision.CompareTag("Enemy") || per == -1)
+        // 적에게 총알이 맞을때마다 관통력 -1 . . 0이하가 되면 active false
+        if (!collision.CompareTag("Enemy") || per == -100)
             return;
 
         per--;
 
-        if(per == -1)
+        if(per < 0) // 관통 이후의 로직을 조금 더 느슨하게 변경
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area") || per == -100)
+            return;
+
+        gameObject.SetActive(false);
     }
 }

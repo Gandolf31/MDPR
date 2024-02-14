@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     // 몬스터의 정보 배열
     public SpawnData[] spawnData;
 
+    public float levelTime;
+
     int level;
     float timer;
 
@@ -15,6 +17,8 @@ public class Spawner : MonoBehaviour
     {
         // 스폰 포인트 위치를 가지고 있는 자식 빈 게임오브젝트들을 설정한 배열 변수에다 초기화
         spawnPoint = GetComponentsInChildren<Transform>();
+
+        levelTime = GameManager.instance.maxGameTime / spawnData.Length;
     }
     void Update()
     {
@@ -25,7 +29,7 @@ public class Spawner : MonoBehaviour
         timer += Time.deltaTime;
         // 시간이 지나면서 더 강한 몬스터 스폰 ( SpawnData에 들어가있음 ) > 기존에 나오던 몬스터도 같이 섞여 나오도록 수정하기
         // 10초(10f) 당 스폰 레벨이 1레벨씩 오르고, 최대 레벨 이상 안올라가도록 Mathf.Min사용
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length - 1);
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / levelTime), spawnData.Length - 1);
 
         // 스폰 타이머, 레벨에 맞는 몬스터 스폰 스폰 데이터에 있는 스폰 쿨타임에 맞춰 스폰
         if(timer > spawnData[level].spawnTime)
