@@ -23,11 +23,13 @@ public class GameManager : MonoBehaviour
     public LevelUp uiLevelUp;   // 레벨업 UI(무기 레벨업 선택 등)
     public Result uiResult;
     public GameObject EnemyCleaner;
+    public Transform uiJoy;
 
     // 게임매니저를 어디서든 접근 가능하도록 인스턴스화
     void Awake()
     {
         instance = this;
+        Application.targetFrameRate = 60;
     }
 
     public void GameStart(int id)
@@ -93,6 +95,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
+
     void Update()
     {
         // 게임 일시정지
@@ -131,6 +139,7 @@ public class GameManager : MonoBehaviour
         {
             isLive = false;
             Time.timeScale = 0;
+            uiJoy.localScale = Vector3.zero;
         }
     }
     public void Resume()
@@ -138,6 +147,7 @@ public class GameManager : MonoBehaviour
         {
             isLive = true;
             Time.timeScale = 1;
+            uiJoy.localScale = Vector3.one;
         }
     }
 }

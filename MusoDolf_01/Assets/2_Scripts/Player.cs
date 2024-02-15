@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class Player : MonoBehaviour
         scanner = GetComponent<Scanner>();
         hands = GetComponentsInChildren<Hand>(true);
 
-        Application.targetFrameRate = 60;
     }
 
 
@@ -30,16 +30,6 @@ public class Player : MonoBehaviour
     {
         speed *= Character.Speed;
         anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
-    }
-
-
-    // 키 입력에 따른 벡터값(플레이어 이동)
-    void Update()
-    {
-        if (!GameManager.instance.isLive)
-            return;
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     // 입력받은 벡터 방향에 따라 실제로 플레이어 위치를 움직임(물리연산 FixedUpdate)
@@ -79,5 +69,10 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Dead");
             GameManager.instance.GameOver();
         }
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>();
     }
 }
