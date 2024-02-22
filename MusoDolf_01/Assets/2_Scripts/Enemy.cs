@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        // 게임 정지 확인
         if (!GameManager.instance.isLive)
             return;
         rigid = GetComponent<Rigidbody2D>();
@@ -32,10 +33,12 @@ public class Enemy : MonoBehaviour
     {
         if (!GameManager.instance.isLive)
             return;
+        // 죽어있거나 피격중이면 스킵 ( 경직 )
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             return;
         }
+        // 플레이어 추적
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
@@ -55,6 +58,7 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
+        // 스폰되었을때 초기화 세팅
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         coll.enabled = true;
@@ -67,6 +71,7 @@ public class Enemy : MonoBehaviour
 
     public void Init(SpawnData data)
     {
+        // 스포너에 저장한 Enemy정보/타입 가져오기
         anim.runtimeAnimatorController = animCon[data.spriteType];
         speed = data.speed;
         maxHealth = data.health;
@@ -85,6 +90,7 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("Hit");
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
+        // 적이 죽으면
         else
         {
             isLive = false;
@@ -108,7 +114,7 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
 
     }
-
+    // Dead 애니메이션에 들어가있는 함수
     void Dead()
     {
         gameObject.SetActive(false);

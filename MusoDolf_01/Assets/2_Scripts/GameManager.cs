@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [Header("# Game Control")]
-    public bool isLive;                     // 게임 Live체크(일시정지, 레벨업 등)
-    public float gameTime;                  // 게임 시간
-    public float maxGameTime = 2 * 10f;     // 게임 시간 제한
+    // 게임 Live체크(일시정지, 레벨업 등)
+    public bool isLive;                     
+    public float gameTime;                  
+    public float maxGameTime = 2 * 10f;    
     [Header("# Player Info")]
     public int playerId;
     public float health;
@@ -16,11 +17,11 @@ public class GameManager : MonoBehaviour
     public int level;
     public int kill;
     public int exp;
-    public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 }; // 각각 다음 레벨까지 필요한 경험치 양
+    public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
     [Header("# Game Object")]   
     public PoolManager pool;
     public Player player;
-    public LevelUp uiLevelUp;   // 레벨업 UI(무기 레벨업 선택 등)
+    public LevelUp uiLevelUp;
     public Result uiResult;
     public GameObject EnemyCleaner;
     public Transform uiJoy;
@@ -38,8 +39,9 @@ public class GameManager : MonoBehaviour
         health = maxHealth;
 
         player.gameObject.SetActive(true);
-        //test
-        uiLevelUp.Select(playerId % 2);    // 캐릭터id에 해당하는 캐릭터의 무기로 게임 스타트
+
+        // 캐릭터id에 해당하는 캐릭터의 무기로 게임 스타트 
+        uiLevelUp.Select(playerId % 2);   
         Resume();
 
         AudioManager.instance.PlayBgm(true);    
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
     {
 
         isLive = false;
+        // 맵 전체를 10000~~ 데미지의 콜라이더로 덮어서 게임 종료시 적 정리
         EnemyCleaner.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
@@ -124,7 +127,8 @@ public class GameManager : MonoBehaviour
             return;
         exp++;
 
-        if(exp == nextExp[Mathf.Min(level, nextExp.Length-1)]) //만렙되면 최고 경험치통을 계속 사요ㅛㅇ
+        // 만렙되면 최고 경험치통을 계속 사용
+        if (exp == nextExp[Mathf.Min(level, nextExp.Length-1)]) 
         {
             level++;
             exp = 0;

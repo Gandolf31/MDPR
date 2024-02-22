@@ -24,14 +24,15 @@ public class Hand : MonoBehaviour
     void LateUpdate()
     {
         bool isReverse = player.flipX;
-
-        if(isLeft) // 왼손에 든건 근접무기라는 것
+        // 왼손에 든건 근접무기라는 것
+        if (isLeft) 
         {
             transform.localRotation = isReverse ? leftRotReverse : leftRot;
             spriter.flipY = isReverse;
             spriter.sortingOrder = isReverse ? 4 : 6;
         }
-        else // 오른손에는 원거리
+        // 오른손에는 원거리
+        else
         {
             transform.localPosition = isReverse ? rightPosReverse : rightPos;
             spriter.flipX = isReverse;

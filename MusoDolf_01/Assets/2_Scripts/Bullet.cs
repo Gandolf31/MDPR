@@ -28,19 +28,20 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 적에게 총알이 맞을때마다 관통력 -1 . . 0이하가 되면 active false
+        // 적에게 총알이 맞을때마다 관통력 -1 . . 0이하가 되면 active false|
         if (!collision.CompareTag("Enemy") || per == -100)
             return;
 
         per--;
-
-        if(per < 0) // 관통 이후의 로직을 조금 더 느슨하게 변경
+        // 관통 이후의 로직을 조금 더 느슨하게 변경
         {
+            if (per < 0) 
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
     }
 
+    // 화면 밖으로 나간 총알 삭제
     void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Area") || per == -100)

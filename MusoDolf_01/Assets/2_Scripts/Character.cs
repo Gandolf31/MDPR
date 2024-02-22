@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    // 캐릭터 종류(ID)에 따라서 플레이어의 특성을 조절함
+    // ex) 플레이어 아이디 1번은 Speed 특성을 1.1(10%)더 높게 가져감
     public static float Speed
     {
         get { return GameManager.instance.playerId == 0 ? 1.1f : 1f; }
