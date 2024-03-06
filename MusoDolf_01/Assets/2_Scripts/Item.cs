@@ -20,17 +20,21 @@ public class Item : MonoBehaviour
         icon = GetComponentsInChildren<Image>()[1];
         icon.sprite = data.itemIcon;
 
+        // 각 아이템 자식에 있는 text를 가져와서 각각 저장
         Text[] texts = GetComponentsInChildren<Text>();
         textLevel = texts[0];
         textName = texts[1];
         textDesc = texts[2];
         textName.text = data.itemName;
+        
     }
 
     void OnEnable()
     {
         textLevel.text = "Lv." + (level + 1);
 
+        // 스크립터블 오브젝트에 저장된 문장을 가져와서 String.Format으로 문자열 형식 지정
+        // ex) 데미지 {0}% 증가, 150 
         switch ( data.itemType)
         {
             case ItemData.ItemType.Melee:
@@ -45,7 +49,6 @@ public class Item : MonoBehaviour
                 textDesc.text = string.Format(data.itemDesc);
                 break;
         }
-        
     }
 
 
@@ -53,6 +56,7 @@ public class Item : MonoBehaviour
     {
         switch (data.itemType)
         {
+            // 
             case ItemData.ItemType.Melee:
             case ItemData.ItemType.Range:
                 if(level == 0)
@@ -73,6 +77,7 @@ public class Item : MonoBehaviour
                 }
                 level++;
                 break;
+            // 
             case ItemData.ItemType.Glove:
             case ItemData.ItemType.Shoe:
                 if (level == 0)

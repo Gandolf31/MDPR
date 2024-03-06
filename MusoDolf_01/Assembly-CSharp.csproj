@@ -63,6 +63,7 @@
     <Compile Include="Assets\2_Scripts\Weapon.cs" />
     <Compile Include="Assets\2_Scripts\PoolManager.cs" />
     <Compile Include="Assets\2_Scripts\Reposition.cs" />
+    <Compile Include="Assets\2_Scripts\1_Main\SceneChanger.cs" />
     <Compile Include="Assets\2_Scripts\Follow.cs" />
     <Compile Include="Assets\2_Scripts\Spawner.cs" />
     <Compile Include="Assets\2_Scripts\LevelUp.cs" />
