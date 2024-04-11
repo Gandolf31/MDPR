@@ -58,6 +58,7 @@
     <Analyzer Include="D:\Unity\Unity 2022.3.2f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\2_Scripts\Original\Endless.cs" />
     <Compile Include="Assets\2_Scripts\HUD.cs" />
     <Compile Include="Assets\2_Scripts\Enemy.cs" />
     <Compile Include="Assets\2_Scripts\Weapon.cs" />
@@ -69,8 +70,10 @@
     <Compile Include="Assets\2_Scripts\LevelUp.cs" />
     <Compile Include="Assets\2_Scripts\Hand.cs" />
     <Compile Include="Assets\2_Scripts\Result.cs" />
+    <Compile Include="Assets\2_Scripts\TestReposition.cs" />
     <Compile Include="Assets\2_Scripts\AudioManager.cs" />
     <Compile Include="Assets\2_Scripts\Scanner.cs" />
+    <Compile Include="Assets\2_Scripts\Original\PlayerMove.cs" />
     <Compile Include="Assets\2_Scripts\Gear.cs" />
     <Compile Include="Assets\2_Scripts\GameManager.cs" />
     <Compile Include="Assets\2_Scripts\Player.cs" />
